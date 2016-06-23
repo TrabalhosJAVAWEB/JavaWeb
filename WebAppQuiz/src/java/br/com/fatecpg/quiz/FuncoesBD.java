@@ -8,6 +8,9 @@ package br.com.fatecpg.quiz;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -85,6 +88,63 @@ public class FuncoesBD {
         
     }
     
+    public static ArrayList<Questao> getQuestoes(){
+        ArrayList<Questao> list = new ArrayList<>();
+        
+        Connection con; 
+        Statement stmt;
+        ResultSet rs;
+        
+        try{
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+            String url = "jdbc:derby://localhost:1527/quiz";
+            con = DriverManager.getConnection(url,"app","app");
+            String sql = "SELECT * FROM questao";
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+            while(rs.next()){
+                Questao q = new Questao(
+                                rs.getString("pergunta"),
+                                rs.getString("resposta"),
+                                rs.getString("alt1"),
+                                rs.getString("alt2"),
+                                rs.getString("alt3"),
+                                rs.getString("alt4")
+                                );
+                list.add(q);    
+            }
+                return list;
+        }catch(Exception ex){
+            return null;
+        }
+    }
     
-    
+    public static ArrayList<HistoricoQuiz> getHistorico(){
+        ArrayList<HistoricoQuiz> list = new ArrayList<>();
+        
+        Connection con; 
+        Statement stmt;
+        ResultSet rs;
+        
+        try{
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+            String url = "jdbc:derby://localhost:1527/quiz";
+            con = DriverManager.getConnection(url,"app","app");
+            String sql = "SELECT * FROM historico";
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+            while(rs.next()){
+                HistoricoQuiz h = new HistoricoQuiz(
+                                rs.getInt("codigo"),
+                                rs.getString("login"),
+                                rs.getString("nome_usuario"),
+                                rs.getDouble("pontuacao")
+                                );
+                list.add(h);    
+            }
+                return list;
+        }catch(Exception ex){
+            return null;
+        }
+    }
 }
