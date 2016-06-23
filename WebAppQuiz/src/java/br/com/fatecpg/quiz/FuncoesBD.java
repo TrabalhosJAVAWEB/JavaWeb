@@ -41,4 +41,50 @@ public class FuncoesBD {
         
     }
     
+    public boolean cadQuestao(Questao ques){
+        PreparedStatement stmt;
+        
+        try{
+            Class.forName(Servidor);
+            con = DriverManager.getConnection(urlbanco, usuarioB, senhaB);
+            stmt = con.prepareStatement("INSERT INTO questao(pergunta, resposta, alt1, alt2, alt3, alt4) VALUES (?,?,?,?,?,?)");
+            stmt.setString(1, ques.getPergunta());
+            stmt.setString(2, ques.getResposta());
+            stmt.setString(3, ques.getAlt1());
+            stmt.setString(4, ques.getAlt2());
+            stmt.setString(5, ques.getAlt3());
+            stmt.setString(6, ques.getAlt4());
+            
+            sqlc = stmt.toString();
+            stmt.executeUpdate();
+            return true;
+        }catch(Exception ex){
+            System.out.println("erro: "+ ex.getMessage() +"\n" +ex.getLocalizedMessage());
+            return false;
+        }
+        
+    }
+    
+    public boolean cadHistorico(HistoricoQuiz his){
+        PreparedStatement stmt;
+        
+        try{
+            Class.forName(Servidor);
+            con = DriverManager.getConnection(urlbanco, usuarioB, senhaB);
+            stmt = con.prepareStatement("INSERT INTO historico(login, nome_usuario, pontuacao) VALUES (?,?,?)");
+            stmt.setString(1, his.getLogin());
+            stmt.setString(2, his.getNome_usuario());
+            stmt.setDouble(3, his.getPontuacao());
+            sqlc = stmt.toString();
+            stmt.executeUpdate();
+            return true;
+        }catch(Exception ex){
+            System.out.println("erro: "+ ex.getMessage() +"\n" +ex.getLocalizedMessage());
+            return false;
+        }
+        
+    }
+    
+    
+    
 }

@@ -14,22 +14,14 @@ import java.util.Date;
 public class HistoricoQuiz {
     private int codigo;
     private String login;
+    private String nome_usuario;
     private double pontuacao;
-    private Date data;
 
-    public HistoricoQuiz(int codigo, String login, double pontuacao, Date data) {
+    public HistoricoQuiz(int codigo, String login, String nome_usuario, double pontuacao) {
         this.codigo = codigo;
         this.login = login;
+        this.nome_usuario = nome_usuario;
         this.pontuacao = pontuacao;
-        this.data = data;
-    }
-
-    public Date getData() {
-        return data;
-    }
-
-    public void setData(Date data) {
-        this.data = data;
     }
 
     public int getCodigo() {
@@ -48,6 +40,14 @@ public class HistoricoQuiz {
         this.login = login;
     }
 
+    public String getNome_usuario() {
+        return nome_usuario;
+    }
+
+    public void setNome_usuario(String nome_usuario) {
+        this.nome_usuario = nome_usuario;
+    }
+
     public double getPontuacao() {
         return pontuacao;
     }
@@ -55,7 +55,6 @@ public class HistoricoQuiz {
     public void setPontuacao(double pontuacao) {
         this.pontuacao = pontuacao;
     }
-
     
     
 }

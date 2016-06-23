@@ -20,7 +20,8 @@
                 String Login = request.getParameter("login").toString();
                 String nome = request.getParameter("nome").toString();
                 long hash = Long.parseLong(request.getParameter("senha").toString());
-                boolean administrador = Boolean.parseBoolean(request.getParameter("administrador").toString());
+                String adm = request.getParameter("administrador").toString();
+                boolean administrador = (adm.equals("on"))?true:false;
                 boolean teste = bd.cadUsuario(new Usuario(Login, nome, hash, administrador));
                 if(teste){%><h1>Salvo Com Sucesso</h1><%;}
                 else{ %><h1>erro</h1><%;}
